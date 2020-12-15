@@ -1,0 +1,73 @@
+{% load static %}
+<footer>
+
+    <div class="footer-top">
+        <div class="container" id="footer">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <a href="{% url 'home-page' %}" class="logo mr-auto "><img src="{% static 'images/main_logo.png' %}"
+                                                                              alt="" class="img-fluid"></a>
+                    <p class="body-font">
+                        السعوديه <br>
+                        الرياض<br>
+                        <strong><i class="fa fa-phone" aria-hidden="true"></i>966549858385</strong> <br>
+                        <strong><i class="fa fa-envelope-open" aria-hidden="true"></i></strong> info@bauhaus.com<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-6 col-md-6 ">
+                    <form action="#" method="post" role="form" >
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control body-font" id="name" placeholder="الأسم"
+                                       data-rule="minlen:4" data-msg="الأسم"/>
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input type="email" class="form-control body-font" name="email" id="email"
+                                       placeholder="البريد الألكترونى" data-rule="البريد الألكترونى"
+                                       data-msg="البريد الألكترونى"/>
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control body-font" name="address" id="address" placeholder="العنوان"
+                                   data-rule="minlen:4" data-msg="العنوان"/>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control body-font" id="message" name="message" rows="5" data-rule="required"
+                                      data-msg="الرساله" placeholder="الرساله"></textarea>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="loading body-font">من فضلك إنتظر</div>
+                            <div class="error-message body-font"></div>
+                            <div class="sent-message body-font">تم اسرسال الرساله</div>
+                        </div>
+                        <div class="text-center">
+                            <button id="btn_submit" type="submit" class="btn btn-mandigo body-font">إرسل</button>
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+        <center>
+            <div class="social-links text-center ">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </center>
+    </div>
+</footer>

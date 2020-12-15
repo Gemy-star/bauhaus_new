@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="sidebar-menu">
+    <div class="sidebar-header">
+        <div class="logo">
+            <a href="{% url 'home-page' %}"><img src="{% static 'images/main_logo.png' %}" alt="logo"></a>
+        </div>
+    </div>
+    <div class="main-menu">
+        <div class="menu-inner">
+            <nav>
+                <ul class="metismenu" id="menu">
+                    <li class="active">
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span
+                                class="body-font">باهاوس</span></a>
+                        <ul class="collapse">
+                            <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
+                            <li><a href="" class="body-font">إضافة عمل</a></li>
+                            <li class="body-font"><a class="body-font" href="{% url 'register-outdoor' %}"> إضافة مهندس غير معتمد</a>
+                            </li>
+                            <li class="body-font"><a class="body-font" href="">قائمة المهندسين </a>
+                            </li>
+                            <li class="body-font"><a class="body-font" href="">قائمة الأعمال</a>
+                            </li>
+                            <li class="body-font"><a class="body-font" href="">طلبات المقايسه</a></li>
+                            <li class="body-font"><a class="body-font" href="">قائمة الأستفسارات</a>
+
+                            </li>
+                            {% if request.user.user_type == 4 %}
+                                <li><a class="body-font" href="">إضافة
+                                    منحه</a></li>
+
+                            {% endif %}
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

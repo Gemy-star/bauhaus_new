@@ -1,0 +1,55 @@
+{% load static %}
+
+<header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+
+        <a href="{% url 'home-page' %}" class="logo mr-auto"><img src="{% static 'images/main_logo.png' %}" alt="" class="img-fluid"></a>
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li class="active body-font"><a href="{% url 'home-page' %}" class="body-font"> الرئيسيه</a></li>
+                <li class="body-font"><a href="#" class="body-font">عن باوهاوس</a></li>
+                <li class="body-font"><a href="#" class="body-font">الخدمات</a></li>
+                {% if request.user.user_type ==  3 %}
+                    <li class="body-font"><a href="" class="body-font"> خدماتنا</a></li>
+
+                {% endif %}
+                {% if request.user.user_type is None %}
+                    <li class="body-font"><a href="{% url 'login' %}" class="body-font">تسجيل الدخول</a></li>
+                {% endif %}
+                {% if request.user.user_type !=  1 and  request.user.user_type !=  2 and request.user.user_type !=  3 %}
+                    <li  class="body-font"><a href="{% url 'register-customer' %}" class="body-font" >إنشاء حساب</a></li>
+                {% endif %}
+                {% if  request.user.user_type ==  3 %}
+                    <li  class="body-font"><a href="" class="body-font">راسلنا</a></li>
+                {% endif %}
+                <li class="drop-down body-font"><a class="body-font" href="">الصفحه الشخصيه</a>
+                    <ul>
+                        {% if request.user.user_type ==  1 or  request.user.user_type ==  2 or request.user.user_type ==  3 or request.user.user_type ==  4 %}
+                            <li  class="body-font"><a href="" class="body-font" >الملف الشخصى</a></li>
+                            {% if request.user.user_type ==  1 or  request.user.user_type ==  2 or request.user.user_type ==  3 %}
+                                <li  class="body-font"><a href="" class="body-font">خروج</a></li>
+                            {% endif %}
+                        {% endif %}
+                        {% if request.user.user_type ==  1 or   request.user.user_type ==  2 %}
+                            <li class="drop-down body-font"><a class="body-font" href="#">إدارة الحساب</a>
+                            <ul>
+
+                                <li  class="body-font"><a  href="">الأستفسارات</a></li>
+                                <li  class="body-font"><a href="" class="body-font">طلبات المقايسه</a></li>
+                                <li  class="body-font"><a href="" class="body-font">طلبات العمل</a></li>
+                                <li  class="body-font"><a href="" class="body-font"> إضافة مهندس</a></li>
+
+                            </ul>
+                        {% endif %}
+
+                        </li>
+
+                    </ul>
+                </li>
+                <li><a href=https://wa.me/966549858385/"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+
+            </ul>
+        </nav>
+
+    </div>
+</header>

@@ -1,0 +1,189 @@
+{% extends 'main.html' %}
+
+
+{% block title %}  باهاوس || الصفحه الرئيسيه{% endblock title %}
+
+{% load  static %}
+
+{% block content %}
+     <section id="hero">
+    <div class="hero-container">
+      <h3 class="body-font"> <strong>باهاوس </strong></h3>
+      <h1 class="body-font">مابين الفكرة والتنفيذ</h1>
+      <h2 class="body-font"> إلهام وإنسان</h2>
+    </div>
+  </section>
+  <main id="main">
+<section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2 class="body-font">عن باهاوس</h2>
+          <h3><span></span></h3>
+          <p class="body-font">
+              باوهاوس شبكة المهندسين والمهنيين والهاوين في مجال الهندسة المعمارية
+
+          </p>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <p class="body-font">
+                ويهدف باوهاوس إلى:
+
+            </p>
+            <ul>
+              <li class="body-font"><i class="ri-check-double-line"></i>  أنسنة العمل المعماري والهندسي</li>
+              <li class="body-font"><i class="ri-check-double-line" ></i> تبسيط الفكرة والمفهوم</li>
+              <li class="body-font"><i class="ri-check-double-line"></i>  نجعل المجال أكثر متعة ووضوح للمستهلك</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+                 <ul>
+              <li class="body-font"><i class="ri-check-double-line"></i>نعمل معك وفق ميزانيتك</li>
+              <li class="body-font"><i class="ri-check-double-line"></i> تبسيط الفكرة والمفهومنعمل معك وفق ميزانيتك</li>
+              <li class="body-font"><i class="ri-check-double-line"></i> نساهم في توطين المجال</li>
+                     <li class="body-font"><i class="ri-check-double-line"></i>مجال خصب لنقل المعرفة والتجربة للمبتدئين</li>
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+{# <section id="services" class="services">#}
+{#      <div class="container">#}
+{##}
+{#        <div class="section-title">#}
+{#          <h2>خدماتنا</h2>#}
+{#          <h3>نعمل معكم  <span>بحب وإبداع</span></h3>#}
+{#        </div>#}
+{##}
+{#             {% for service in services %}#}
+{#          <div class="col-lg-3 col-md-4 col-6 mt-4">#}
+{#            <div class="icon-box">#}
+{#              <div class="icon"><i class="bx bxl-dribbble"></i></div>#}
+{#              <h4 class="title aida-font"><a href="">{{ service.name }}</a></h4>#}
+{#              <p class="description aida-font">{{ service.description }}</p>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#        </div>#}
+{#{% endfor %}#}
+{##}
+{#    </section>#}
+<section id="cta" class="cta">
+      <div class="container">
+
+        <div class="text-center">
+          <h3 class="body-font">ابدأ رحلتك معنا</h3>
+          <p class="body-font"> انضم لشبكة المهندسين والمصممين.</p>
+          <a class="cta-btn body-font" href="#">إيدأ</a>
+        </div>
+
+      </div>
+    </section>
+   <section id="team" class="team">
+      <div class="container">
+
+        <div class="section-title">
+          <h2 class="body-font">فريقنا</h2>
+          <h3 class="body-font"> مهندسون سعوديون</h3>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static 'images/team1.png' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4 class="body-font">أماني الشعلان</h4>
+                <span class="body-font">Chief Executive Officer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static 'images/team1.png' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4 class="body-font">فاطمه أبو القاسم</h4>
+                <span>Product Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static 'images/team1.png' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4 class="body-font">شذى السعيد</h4>
+                <span class="body">CTO</span>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </section>
+<section id="contact" class="contact">
+      <div class="container">
+          <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="icofont-google-map"></i>
+                <p class="body-font">الرياض السعوديه</p>
+              </div>
+
+              <div class="email">
+                <i class="icofont-envelope"></i>
+                <p class="body-font">info@bauhaus.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="icofont-phone"></i>
+                <p class="body-font">966549858385</p>
+              </div>
+
+            </div>
+
+          </div>
+               <div class="col-lg-6">
+          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+      </div>
+      </div>
+</section>
+
+  </main>
+
+{% endblock content %}

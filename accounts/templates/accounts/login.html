@@ -1,0 +1,183 @@
+{% extends 'main.html' %}
+
+{% block title %} تسجيل الدخول {% endblock title %}
+
+{% block content %}
+    <main id="main">
+       <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/bauhaus.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <span class="text-cursive h5 " style="color: #5DBD7E"> خير السعوديه</span>
+              <h1 class="mb-3 font-weight-bold body-font">تسجيل دخول </h1>
+              <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong> تسجيل دخول </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+        <section id="about" class="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-8">
+                        <div class="card" >
+                            <div class="card-header">
+                                <h3 class="body-font text-mandigo"> تسجيل دخول</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="#" method="post" role="form" class="php-email-form">
+                                    {% csrf_token %}
+                                    <center>   <div class="col-md-6 form-group" id="login_input">
+                                        <label for="email" class="body-font text-mandigo">البريد الألكترونى</label>
+                                        <hr/>
+                                        <input type="email" class="form-control body-font" name="email" id="email"
+                                               placeholder="البريد الألكترونى" data-rule="البريد الألكترونى"
+                                               data-msg="البريد الألكترونى"/>
+                                        <div class="validate"></div>
+                                               <div class="text-center body-font">
+                                  <button id="btn_login" class="btn btn-mandigo" type="submit">الدخول</button>
+                                    </div>
+                                    </div></center>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}
+
+
+{% block javascript %}
+    <script>
+        var email_address;
+        var user = {
+            user_type: null,
+            user_type_id: 0
+        };
+        $(() => {
+            $("#btn_login").on('click', event => {
+                event.preventDefault();
+                    $.ajax({
+                    method: 'POST',
+                    url: '{% url 'check-email' %}',
+                    data: {
+                        'email': $('#email').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+
+                    },
+                    success: function (data) {
+                         if (data.status) {
+                                email_address = data.email;
+                                if (data.user_type === 2) {
+                                    user.user_type = ' مهندس معتمد'
+                                    user.user_type_id = 2
+                                sessionStorage.setItem('user' , user)
+
+                                } else if (data.user_type === 3) {
+                                    user.user_type = 'عميل'
+                                    user.user_type_id = 3
+                                sessionStorage.setItem('user' , user)
+
+                                } else if (data.user_type === 4) {
+                                    user.user_type = 'مهندس غير معتمد'
+                                    user.user_type_id = 4
+                                    sessionStorage.setItem('user', user)
+
+                                } else {
+                                    user.user_type = 'مشرف عام'
+                                    user.user_type_id = 1
+                                    sessionStorage.setItem('user' , user)
+
+
+                                }
+                                $("#login_input").empty();
+                         $("#login_input").append(`
+                           <center>   <div class="col-md-6 form-group" id="login_input">
+ <h3  class="body-font h5 text-mandigo">${data.user_name}</h3>
+                          <p  class="body-font h5 text-mandigo">${user.user_type}</p>
+                   </div>
+                                        <input type="password" class="form-control body-font" name="password" id="password"
+                                               placeholder="ادخل كلمة المرور " data-rule=" كلمة المرور"
+                                               data-msg=" كلمة المرور"/>
+                                        <div class="validate"></div>
+    <div class="text-center body-font">
+                                  <button id="btn_password" class="btn btn-mandigo" type="submit">الدخول</button>
+                                    </div>
+                         `);
+          $("#btn_password").on('click', event => {
+                                    event.preventDefault();
+                                    $.ajax({
+                                        method: 'POST',
+                                        url: '{% url 'login' %}',
+                                        data: {
+                                            'email': email_address,
+                                            'password': $("#password").val(),
+                                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                                        },
+                                        success: function (data) {
+                                            if (data.status === 'done') {
+                                                swal({
+                                                    title: "تم",
+                                                    text: "تم  بنجاح",
+                                                    icon: "success",
+                                                    button: "إغلاق",
+                                                });
+
+
+                                                if (user.user_type_id === 2) {
+                                                    window.location.href = '{% url 'home-engineer' %}'
+                                                } else if (user.user_type_id === 3) {
+                                                    window.location.href = '{% url 'home-page' %}'
+                                                } else if (user.user_type_id === 4) {
+                                                    window.location.href = '{% url 'home-engineer' %}'
+                                                }
+                                                else {
+                                                    window.location.href = '{% url 'home-engineer' %}'
+                                                }
+                                            } else {
+                                                swal({
+                                                    title: "خطا",
+                                                    text: "من فضلك راجع البيانات",
+                                                    icon: "error",
+                                                    button: "إغلاق",
+                                                });
+                                            }
+                                        },
+                                        error: function (error) {
+                                            alert(error.responseText)
+                                        }
+                                    });
+
+                                });
+                            }else {
+                                swal({
+                                    title: "خطا",
+                                    text: "من فضلك راجع البيانات",
+                                    icon: "error",
+                                    button: "إغلاق",
+                                });
+                            }
+                        }, error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock javascript %}

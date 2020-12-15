@@ -1,0 +1,69 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %}   إدارة العمل {% endblock title %}
+
+
+
+{% block body %}
+
+  <div class="main-content-inner">
+  <div class="card">
+      <div class="card-body">
+          <form action="#" method="post" role="form" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="first_name" class="form-control body-font" id="first_name" placeholder="الأسم"
+                                       data-rule="minlen:4" data-msg="الأسم"/>
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                  <input type="text" name="last_name" class="form-control body-font" id="last_name" placeholder="اللقب"
+                                       data-rule="minlen:4" data-msg="اللقب"/>
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control body-font" name="address" id="address" placeholder="العنوان"
+                                   data-rule="minlen:4" data-msg="العنوان"/>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="form-group">
+                              <input type="email" class="form-control body-font" name="email" id="email"
+                                       placeholder="البريد الألكترونى" data-rule="البريد الألكترونى"
+                                       data-msg="البريد الألكترونى"/>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input type="password" name="password" class="form-control body-font" id="password" placeholder="كلمة المرور"
+                                       data-rule="minlen:4" data-msg="كلمة المرور"/>
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                  <input type="text" name="phone" class="form-control body-font" id="phone" placeholder="الهاتف"
+                                       data-rule="minlen:4" data-msg="الهاتف"/>
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="loading body-font">من فضلك إنتظر</div>
+                            <div class="error-message body-font"></div>
+                        </div>
+                        <div class="text-center">
+                  <input type="submit" id="submit" name="submit" value="إرسل" class="btn btn-mandigo body-font"/>
+                        </div>
+                    </form>
+
+      </div>
+  </div>
+  </div>
+
+{% endblock body %}
+
+
+{% block javascript %}
+
+
+{% endblock javascript %}
