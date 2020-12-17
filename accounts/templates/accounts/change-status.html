@@ -1,0 +1,128 @@
+{% extends 'main.html' %}
+
+
+
+{% block title %} تغيير الحاله  {% endblock title %}
+
+
+{% block content %}
+    <main id="main">
+        <div class="ftco-blocks-cover-1">
+            <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+            <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+                 style="background-image: url('../../../static/images/bauhaus3.png')">
+                <div class="container">
+                    <div class="row align-items-center ">
+
+                        <div class="col-md-5 mt-5 pt-5">
+                            <h1 class="mb-3 font-weight-bold body-font"> تغيير الحاله </h1>
+                            <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span
+                                    class="mx-3">/</span> <strong> تغيير الحاله </strong></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section id="about" class="about">
+            <div class="container">
+             <div class="section-title">
+          <h2 class="body-font text-mandigo">تغيير الحاله  </h2>
+        </div>
+                <div class="row">
+
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-8">
+                        <div class="card">
+
+                            <div class="card-body">
+                                <h3 class="body-font text-black">الحاله السابقه</h3>
+                                {% if status == 1 %}
+                                    <p class="body-font text-mandigo"> متاح</p>
+                                {% endif %}
+                                {% if status == 2 %}
+                                    <p class="body-font text-mandigo"> غير متاح</p>
+                                {% endif %}
+                              {% if status == 0 %}
+                                    <p class="body-font text-mandigo"> لم يتم تحديد حاله من قبل</p>
+                                {% endif %}
+                                <hr/>
+                                <form action="#" method="POST">
+                                    {% csrf_token %}
+
+                                    <div class="form-group row">
+                                        <div class="col-6">
+                                            <label class="body-font" for="status_opt">اختار الحاله</label>
+
+                                            <select class="form-control body-font" name="status_opt" id="status_opt">
+                                                <option class="body-font" value="1">متاح</option>
+                                                <option class="body-font" value="2">غير متاح</option>
+
+                                            </select>
+
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="submit" value="تاكيد" class="btn btn-mandigo body-font" id="btn_status">
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock content %}
+
+
+{% block javascript %}
+    <script>
+
+        $(() => {
+       $("#btn_status").on('click' , event => {
+           event.preventDefault();
+
+                                               $.ajax({
+                                        method: 'POST',
+                                        url: '{% url 'change-status' request.user.pk %}',
+                                        data: {
+                                            'status': $("#status_opt").val(),
+                                            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                                        },
+                                        success: function (data) {
+                                            if (data.data === 1) {
+                                                swal({
+                                                    title: "تم",
+                                                    text: "تم  بنجاح",
+                                                    icon: "success",
+                                                    button: "إغلاق",
+                                                });
+                                              window.location.reload();
+                                            } else {
+                                                swal({
+                                                    title: "خطا",
+                                                    text: "من فضلك راجع البيانات",
+                                                    icon: "error",
+                                                    button: "إغلاق",
+                                                });
+                                            }
+                                        },
+                                        error: function (error) {
+                                            alert(error.responseText)
+                                        }
+                                    });
+
+       })
+
+        });
+    </script>
+
+{% endblock javascript %}

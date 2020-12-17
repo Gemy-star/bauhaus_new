@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+
+{% block title %} طلب عمل {% endblock title %}
+
+{% block content %}
+<main id="main">
+       <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/bauhaus1.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <h1 class="mb-3 font-weight-bold body-font">طلب عمل</h1>
+              <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong> طلب عمل </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <section id="about" class="about">
+            <div class="container">
+                                                             <div class="section-title">
+          <h2 class="body-font text-mandigo">طلب عمل </h2>
+        </div>
+
+                <div class="row">
+                    <div class="col-9">
+                        <div class="card">
+                            <div class="card-body">
+                                                        <div  class="reply-form">
+                             <form method="post">
+                                 {% csrf_token %}
+
+                  <div class="row">
+                    <div class="col form-group">
+                      <textarea id="request" name="request" class="form-control" placeholder="اكتب تفاصيل العمل"></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" id="btn_req" class="btn btn-mandigo">إرسال</button>
+
+                </form>
+                        </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </section>
+
+
+</main>
+
+{% endblock content %}
+
+{% block javascript %}
+<script>
+$(()=>{
+    $("btn_req").on('click',event => {
+       event.preventDefault();
+       $.ajax({
+                    method: 'POST',
+                    url: '{% url 'cus-request-eng' engineer.pk %}',
+                    data: {
+                        'request': $('#request').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'home-page' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+    });
+});
+</script>
+
+{% endblock javascript %}

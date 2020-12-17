@@ -1,0 +1,36 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %}  طلبات العمل {% endblock title %}
+
+
+{% block body %}
+<div class="main-content-inner center">
+{% for req in requests %}
+    <div class="card">
+    <div class="card-header">
+        <p class="body-font text-mandigo"> البريد الألكترونى للعميل</p>
+        <p class="body-font text-mandigo"> {{ req.customer_email }}</p>
+    </div>
+    <div class="card-body">
+        <h3 class="body-font text-mandigo">
+            تفاصيل الطلب
+        </h3>
+        <hr/>
+        <p class="body-font">
+            {{ req.request }}
+        </p>
+        <hr/>
+        <h3 class="body-font text-mandigo">تاريخ التقديم</h3>
+        <p class="body-font">{{ req.date_added.date }}</p>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-mandigo body-font" href="{% url 'send-to-customer' req.customer_email %}"> الرد</a>
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,73 @@
+{% extends 'dashmain.html' %}
+
+{% block title %}  إرسال رساله {% endblock title %}
+
+{% block body %}
+    <div class="main-content-inner center">
+        <div class="container">
+            <div class="row">
+                <div class="col-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                            <textarea class="form-control body-font" id="message" name="message" rows="5"
+                                      data-rule="required"
+                                      data-msg="الرساله" placeholder="الرساله"></textarea>
+                                    <div class="validate"></div>
+                                </div>
+                                <center><input id="btn_send" class="btn btn-mandigo text-white" type="submit"
+                                               name="submit" value=إرسال"></center>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock body %}
+
+{% block javascript %}
+    <script>
+        $(() => {
+            $("#btn_send").on('click', event => {
+                event.preventDefault();
+                $.ajax({
+                    method: 'POST',
+                    url: '{% url 'send-to-customer' customer.email %}',
+                    data: {
+                        'message': $('#message').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.history.back();
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+            })
+        });
+    </script>
+{% endblock javascript %}

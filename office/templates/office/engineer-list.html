@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}   الصفحه الشخصيه {% endblock title %}
+
+
+{% block content %}
+<main id="main">
+       <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/bauhaus3.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <h1 class="mb-3 font-weight-bold body-font">قائمة المهندسين</h1>
+              <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong> قائمة المهندسين </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+ <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <div class="row">
+                {% for eng in engineers %}
+                            <article class="entry">
+
+                  <div class="entry-img">
+                    <img src="{% static eng.engineer.profile_pic.url %}" alt="" class="profile-pic">
+                  </div>
+
+                  <h2 class="entry-title body-font text-mandigo">
+                    <a href="{% url 'engineer-detail' eng.pk %}">{{ eng.engineer.first_name }}  {{ eng.engineer.last_name }}</a>
+                  </h2>
+
+                  <div class="entry-meta">
+                    <ul>
+                      <li class="d-flex align-items-center"><i class="icofont-user"></i> {{ eng.engineer.first_name }} </li>
+                      <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <time datetime="{{ eng.engineer.date_joined.date }}">{{ eng.engineer.date_joined.date }}</time></li>
+                    </ul>
+                  </div>
+
+                  <div class="entry-content">
+                    <h5 class="body-font text-mandigo"> الهاتف</h5>
+                      <p class="body-font"> {{ eng.engineer.phone }}</p>
+                      <hr/>
+                          <h5 class="body-font text-mandigo"> الحاله</h5>
+                      {% if eng.status == 1 %}
+                                            <p class="body-font"> متاح</p>
+            {% endif %}
+                  {% if eng.status == 2 %}
+                                            <p class="body-font"> غير متاح</p>
+
+                  {% endif %}
+                      <hr/>
+                    <div class="read-more">
+                      <a href="{% url 'engineer-detail' eng.pk %}">إقرا المزيد</a>
+                        {% if request.user.user_type == 3 %}
+                        <a href="{% url 'cus-request-eng' eng.pk %}">بدأ العمل</a>
+{% endif %}
+                    </div>
+                  </div>
+
+                </article><!-- End blog entry -->
+              </div>
+
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+ </section>
+
+</main>
+
+{% endblock content %}

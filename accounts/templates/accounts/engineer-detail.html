@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}   الصفحه الشخصيه {% endblock title %}
+
+
+{% block content %}
+    <main id="main">
+       <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/h1_hero2.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <h1 class="mb-3 font-weight-bold body-font">الصفحه الشخصيه </h1>
+              <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong> {{ engineer.first_name }} </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <section id="about" class="about">
+            <div class="container">
+                                                             <div class="section-title">
+          <h2 class="body-font text-mandigo">{{ engineer.first_name }}  {{ engineer.last_name }} </h2>
+        </div>
+
+                <div class="row">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-8">
+                        <div class="card" >
+  <img class="img-fluid" src="{% static engineer.profile_pic.url %}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <h5 class="body-font text-black">الأسم</h5>
+                                <p class="body-font text-mandigo">{{ engineer.first_name }} {{ engineer.last_name }}</p>
+                                <hr/>
+                                 <h5 class="body-font text-black">البريد الألكترونى</h5>
+                                <p class="body-font text-mandigo">{{ engineer.email }} </p>
+                                                                <hr/>
+       <h5 class="body-font text-black">الهاتف </h5>
+                                <p class="body-font text-mandigo">{{engineer.phone }} </p>
+                                                                <hr/>
+                                       <h5 class="body-font text-black">العنوان </h5>
+                                <p class="body-font text-mandigo">{{ engineer.address }} </p>
+                                                                <hr/>
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </section>
+
+</main>
+
+
+
+
+{% endblock content %}

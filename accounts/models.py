@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 class UserManager(BaseUserManager):
     def create_user(
-            self, email, first_name, last_name, phone, address,password=None,
+            self, email, first_name, last_name, phone, address, profile_pic, password=None,
             commit=True):
         """
         Creates and saves a User with the given email, first name, last name
@@ -27,6 +27,7 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             phone=phone,
             address=address,
+            profile_pic=profile_pic
 
         )
 
@@ -40,7 +41,7 @@ class UserManager(BaseUserManager):
             user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, last_name, password, address, phone, ):
+    def create_superuser(self, email, first_name, last_name, password, address, phone, profile_pic):
         """
         Creates and saves a superuser with the given email, first name,
         last name and password.
@@ -52,7 +53,7 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             address=address,
             phone=phone,
-
+            profile_pic=profile_pic,
             commit=False,
         )
         user.is_staff = True
@@ -62,7 +63,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_customeruser(self, email, first_name, last_name, phone, address, password):
+    def create_customeruser(self, email, first_name, last_name, phone, address, password, profile_pic):
         """
         Creates and saves a superuser with the given email, first name,
         last name and password.
@@ -74,6 +75,7 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             phone=phone,
             address=address,
+            profile_pic=profile_pic,
             commit=False,
         )
         user.is_customer = True
@@ -84,7 +86,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_engineeruser(self, email, first_name, last_name, password, phone, address):
+    def create_engineeruser(self, email, first_name, last_name, password, phone, address, profile_pic):
         """
         Creates and saves a superuser with the given email, first name,
         last name and password.
@@ -96,6 +98,7 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             phone=phone,
             address=address,
+            profile_pic=profile_pic,
             commit=False,
         )
         user.is_admin = False
@@ -107,7 +110,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_outdoor_engineeruser(self, email, first_name, last_name, password, phone, address):
+    def create_outdoor_engineeruser(self, email, first_name, last_name, password, phone, address, profile_pic):
         """
         Creates and saves a superuser with the given email, first name,
         last name and password.
@@ -119,6 +122,7 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             phone=phone,
             address=address,
+            profile_pic=profile_pic,
             commit=False,
         )
         user.is_admin = False
@@ -142,6 +146,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     phone = models.CharField(max_length=255, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    profile_pic = models.ImageField(verbose_name='Profile Picture', default='porfile-pic.png')
     address = models.CharField(_('Address'), max_length=255, null=True, blank=True)
     is_customer = models.BooleanField(_('Customer'), default=False, help_text=_(
         'Designates whether this user should be treated as a Customer. '

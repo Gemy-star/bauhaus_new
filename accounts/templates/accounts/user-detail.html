@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}   الصفحه الشخصيه {% endblock title %}
+
+
+{% block content %}
+    <main id="main">
+       <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/bauhaus3.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <h1 class="mb-3 font-weight-bold body-font">الصفحه الشخصيه </h1>
+              <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong> {{ request.user.first_name }} </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <section id="about" class="about">
+            <div class="container">
+                                                             <div class="section-title">
+          <h2 class="body-font text-mandigo">الصفحه الشخصيه </h2>
+        </div>
+
+                <div class="row">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-8">
+                        <div class="card" >
+  <img class="img-fluid" src="/static{{ request.user.profile_pic.url }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="body-font text-black">الأسم</h5>
+                                <p class="body-font text-mandigo">{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                                <hr/>
+                                 <h5 class="body-font text-black">البريد الألكترونى</h5>
+                                <p class="body-font text-mandigo">{{ request.user.email }} </p>
+                                                                <hr/>
+       <h5 class="body-font text-black">الهاتف </h5>
+                                <p class="body-font text-mandigo">{{ request.user.phone }} </p>
+                                                                <hr/>
+                                       <h5 class="body-font text-black">العنوان </h5>
+                                <p class="body-font text-mandigo">{{ request.user.address }} </p>
+                                                                <hr/>
+                                <a class="btn btn-mandigo body-font" href="#"> تغيير كلمة المرور</a>
+                                <hr/>
+                                {% if request.user.user_type == 2  or  request.user.user_type == 1 or  request.user.user_type == 4 %}
+                                <a class="btn btn-mandigo body-font" href="{% url 'change-status' request.user.pk %}"> تغيير الحاله</a>
+                                {% endif %}
+                            {% if request.user.user_type == 3 %}
+                                <a class="btn btn-mandigo body-font" href="{% url 'request-customer-work-list' %}"> الطلبات المقدمه</a>
+                            {% endif %}
+                            </div>
+                        <div class="card-footer">
+                            {% if request.user.user_type == 3 %}
+                            <a href="{% url 'customer-inbox' %}"><i class="icofont-envelope"></i></a>
+                            {% endif %}
+                              {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 4 %}
+                            <a href="{% url 'engineer-inbox' %}"><i class="icofont-envelope"></i></a>
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </section>
+
+</main>
+
+
+
+
+{% endblock content %}

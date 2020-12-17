@@ -19,3 +19,11 @@ def contact_ajax(request):
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
+
+
+def faq_questions(request):
+    return render(request, 'main/faq-questions.html')
+
+
+def contact_page(request):
+    return render(request,'main/contact-page.html')

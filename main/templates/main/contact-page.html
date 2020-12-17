@@ -1,0 +1,152 @@
+{% extends 'main.html' %}
+
+
+{% block title %}  إتصل بنا{% endblock title %}
+
+
+{% block content %}
+<main id="main">
+        <div class="ftco-blocks-cover-1">
+            <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+            <div class="site-section-cover overlay" data-stellar-background-ratio="0.5"
+                 style="background-image: url('../../../static/images/section_bg01.png')">
+                <div class="container">
+                    <div class="row align-items-center ">
+
+                        <div class="col-md-5 mt-5 pt-5">
+                            <h1 class="mb-3 font-weight-bold body-font"> إتصل بنا  </h1>
+                            <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span
+                                    class="mx-3">/</span> <strong> إتصل بنا </strong></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <section id="contact" class="contact">
+         <div class="section-title">
+          <h2 class="body-font text-mandigo">إتصل بنا </h2>
+        </div>
+
+          <div class="container">
+
+
+
+      <div class="row">
+          <div class="col-md-12">
+              <section id="contact" class="contact">
+      <div class="container">
+          <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="icofont-google-map"></i>
+                <p class="body-font">الرياض السعوديه</p>
+              </div>
+
+              <div class="email">
+                <i class="icofont-envelope"></i>
+                <p class="body-font">info@bauhaus.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="icofont-phone"></i>
+                <p class="body-font">966549858385</p>
+              </div>
+
+            </div>
+
+          </div>
+               <div class="col-lg-6">
+                                       <form action="#" method="post" role="form" >
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control body-font" id="name" placeholder="الأسم"
+                                       data-rule="minlen:4" data-msg="الأسم"/>
+                                <div class="validate"></div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input type="email" class="form-control body-font" name="email" id="email"
+                                       placeholder="البريد الألكترونى" data-rule="البريد الألكترونى"
+                                       data-msg="البريد الألكترونى"/>
+                                <div class="validate"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control body-font" name="address" id="address" placeholder="العنوان"
+                                   data-rule="minlen:4" data-msg="العنوان"/>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control body-font" id="message" name="message" rows="5" data-rule="required"
+                                      data-msg="الرساله" placeholder="الرساله"></textarea>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="mb-3">
+
+                        </div>
+                        <div class="text-center">
+                            <button id="btn_contact" type="submit" class="btn btn-mandigo body-font">إرسل</button>
+                        </div>
+                    </form>
+
+        </div>
+
+      </div>
+      </div>
+</section>
+
+          </div>
+      </div>
+  </div>
+
+    </section>
+</main>
+
+{% endblock content %}
+
+
+{% block javascript %}
+<script>
+$(()=>{
+    $("#btn_contact").on('click' , event => {
+     event.preventDefault();
+       $.ajax({
+                    method: 'POST',
+                    url: '{% url 'contact-ajax' %}',
+                    data: {
+                        'name': $('#name').val(),
+                        'address': $('#address').val(),
+                        'message': $('#message').val(),
+                        'email': $('#email').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'home-page' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+});
+</script>
+
+{% endblock javascript %}

@@ -1,0 +1,31 @@
+{% extends 'dashmain.html' %}
+{% block title %} صندوق الوارد  {% endblock title %}
+
+
+{% block body %}
+<div class="main-content-inner">
+<div class="container">
+                    <div class="row">
+                    {% for msg in messages %}
+                    <div class="col-4">
+                 <div class="card">
+                     <div class="card-header">
+                         <h5 class="body-font text-mandigo">{{ msg.sender.first_name }}</h5>
+                         <center><p class="body-font">{{ msg.sender.email }}</p></center>
+                     </div>
+                     <div class="card-body">
+                         <p class="body-font">{{ msg.reply_message }}</p>
+                     </div>
+                     <div class="card-footer">
+                         <center><a class="btn btn-mandigo text-white" href="{% url 'send-to-customer' msg.sender.email %}"></a></center>
+                     </div>
+                 </div>
+                    </div>
+                   {% endfor %}
+                </div>
+
+</div>
+
+</div>
+
+{% endblock body %}

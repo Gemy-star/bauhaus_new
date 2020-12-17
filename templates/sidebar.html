@@ -14,23 +14,17 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span
                                 class="body-font">باهاوس</span></a>
                         <ul class="collapse">
-                            <li><a class="body-font" href="{% url 'home-page' %}">الرئيسيه</a></li>
+                            <li><a class="body-font" href="{% url 'home-engineer' %}">الرئيسيه</a></li>
                             <li><a href="" class="body-font">إضافة عمل</a></li>
-                            <li class="body-font"><a class="body-font" href="{% url 'register-outdoor' %}"> إضافة مهندس غير معتمد</a>
+                            <li class="body-font"><a class="body-font" href="{% url 'register-engineer' %}"> إضافة مهندس  معتمد</a>
                             </li>
-                            <li class="body-font"><a class="body-font" href="">قائمة المهندسين </a>
                             </li>
-                            <li class="body-font"><a class="body-font" href="">قائمة الأعمال</a>
+                            <li class="body-font"><a class="body-font" href="{% url 'request-engineer-work-list' %}">قائمة الطلبات</a>
                             </li>
-                            <li class="body-font"><a class="body-font" href="">طلبات المقايسه</a></li>
-                            <li class="body-font"><a class="body-font" href="">قائمة الأستفسارات</a>
+                            <li class="body-font"><a class="body-font" href="{% url 'engineer-inbox' %}">صندوق الوارد</a>
 
                             </li>
-                            {% if request.user.user_type == 4 %}
-                                <li><a class="body-font" href="">إضافة
-                                    منحه</a></li>
 
-                            {% endif %}
 
                         </ul>
                     </li>

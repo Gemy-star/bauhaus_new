@@ -6,14 +6,87 @@
 
 
 {% block body %}
+    <div class="main-content-inner center">
+            <div class="row justify-content-center">
+                <div class="col-md-5 mr-2">
+                    <div class="card">
+                        <div class="card-title">
+                            <center><p style="font-size: larger;" class="body-font text-mandigo"> عدد الطلبات</p>
+                            </center>
+                        </div>
+                        <div class="card-body" id="req_count">
 
-  <div class="main-content-inner">
-  </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        <br>
+        <hr/>
+      <div class="row justify-content-center">
+                              <div class="col-md-12 ml-2">
+                    <div class="card">
+                        <div class="card-title">
+                            <center><p style="font-size: larger;" class="body-font text-mandigo" id="emp_name">
+                                باهاوس</p></center>
+                        </div>
+                        <div class="card-body" id="emp_info">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+      </div>
+    </div>
+
 
 {% endblock body %}
 
 
 {% block javascript %}
+    <script>
+        var employee = [];
+        var requests = [];
+        var request_count;
 
+        $(() => {
+            $.ajax({
+                method: 'GET',
+                url: '{% url 'emp-info' %}',
+                success: function (data) {
+                    employee = JSON.parse(data.employee)
+                    requests = JSON.parse(data.requests)
+                    request_count = data.request_count
+                    $("#req_count").empty();
+                    $("#req_count").append(`
+                        <p class="body-font">${request_count}</p>
+                        `);
+                    $("#emp_info").empty();
+                    $("#emp_info").append(`
+                           <h2 class="body-font h5 text-mandigo  " >الأسم</h2>
+                                       <p class="body-font h5 text-black " >${employee[0].fields.first_name}</p>
+                                       <hr/>
+  <h2 class="body-font h5 text-mandigo " >العنوان</h2>
+                                       <p class="body-font h5 text-black " >${employee[0].fields.address}</p>
+                                       <hr/>
+  <h2 class="body-font h5 text-mandigo  " >الهاتف</h2>
+                                       <p class="body-font h5 text-black " >${employee[0].fields.phone}</p>
+                                       <hr/>
+  <h2 class="body-font h5 text-mandigo " >البريد الألكترونى</h2>
+                                       <p class="body-font h5 text-black " >${employee[0].fields.email}</p>
+                                       <hr/>
+                        `);
+                }
+                ,
+                error: function (error) {
+                    alert(error.responseText)
+                }
+            });
+        });
+    </script>
 
 {% endblock javascript %}
