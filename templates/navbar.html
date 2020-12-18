@@ -10,7 +10,7 @@
                 <li class="body-font"><a href="#" class="body-font">عن باوهاوس</a></li>
                 <li class="body-font"><a href="{% url 'faq-questions' %}" class="body-font">الأسئله المتكرره</a></li>
                 {% if request.user.user_type ==  3 %}
-                    <li class="body-font"><a href="" class="body-font"> خدماتنا</a></li>
+                    <li class="body-font"><a href="" class="body-font"> اطلب خدمتك</a></li>
 
                 {% endif %}
                 {% if request.user.user_type is None %}
@@ -19,34 +19,27 @@
                 {% if request.user.user_type !=  1 and  request.user.user_type !=  2 and request.user.user_type !=  3 %}
                     <li  class="body-font"><a href="{% url 'register-customer' %}" class="body-font" >إنشاء حساب</a></li>
                 {% endif %}
-                {% if  request.user.user_type ==  3 %}
-                    <li  class="body-font"><a href="" class="body-font">راسلنا</a></li>
-                {% endif %}
-                <li class="drop-down body-font"><a class="body-font" href="#">الصفحه الشخصيه</a>
-                    <ul>
-                        {% if request.user.user_type ==  1 or  request.user.user_type ==  2 or request.user.user_type ==  3 or request.user.user_type ==  4 %}
-                            <li  class="body-font"><a href="{% url 'user-detail' %}" class="body-font" >الملف الشخصى</a></li>
-                            {% if request.user.user_type ==  1 or  request.user.user_type ==  2 or request.user.user_type ==  3 %}
-                                <li  class="body-font"><a href="{% url 'logout' %}" class="body-font">خروج</a></li>
+  <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            الصفحه الشخصيه
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="{% url 'user-detail' %}" class="body-font" >الملف الشخصى</a>
+                         <a href="{% url 'logout' %}" class="body-font">خروج</a>
+                            {% if request.user.user_type == 3 %}
+                                 <div class="dropdown-divider"></div>
+                         <a href="{% url 'engineer-online-list' %}" class="body-font"> المهندسين</a>
+
                             {% endif %}
-                        {% endif %}
-                        {% if request.user.user_type ==  3  %}
-                            <li class="drop-down body-font"><a class="body-font" href="#">إدارة الحساب</a>
-                            <ul>
 
-                    <li class="body-font"><a href="{% url 'engineer-online-list' %}" class="body-font"> المهندسين</a></li>
-                    <li  class="body-font"><a href="{% url 'contact-page' %}" class="body-font">اتصل بنا</a></li>
-                                <li  class="body-font"><a href="{% url 'request-customer-work-list' %}" class="body-font">الطلبات المقدمه</a></li>
 
-                            </ul>
-                        {% endif %}
 
-                        </li>
+                        </div>
+                    </li>
+            <li class="body-font"> <a href="{% url 'contact-page' %}" class="body-font">تواصل معنا</a></li>
 
-                    </ul>
-                </li>
-                <li><a href=https://wa.me/966549858385/"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-
+                <li><a class="google-plus" href="https://wa.me/966581915102/"><i class="fa fa-whatsapp fa-lg" aria-hidden="true"></i></a></li>
             </ul>
         </nav>
 

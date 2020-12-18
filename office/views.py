@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Work, Reply
+from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Work, Reply, BestEngineer
 from accounts.models import User
 from django.http import JsonResponse
 
@@ -73,7 +73,33 @@ def send_to_engineer(request, email):
         else:
             return JsonResponse({"data": -1})
 
+
 def engineer_messgae_list(request):
     eng = User.objects.get(pk=request.user.pk)
     messages = Reply.objects.filter(receiver=eng)
     return render(request, 'office/engineer-message-inbox.html', context={"messages": messages})
+
+
+def best_engineer(request):
+    if request.method == 'GET':
+        engineers = User.objects.filter(user_type=2)
+        admins = User.objects.filter(user_type=1)
+        outdoors = User.objects.filter(user_type=4)
+        return render(request, 'office/add-engineer-month.html',
+                      context={"engineers": engineers, "outdoors": outdoors, "admins": admins})
+    elif request.method == 'POST' and request.is_ajax:
+        month = request.POST.get('month')
+        outdoors = request.POST.getlist('outdoors[]')
+        engineers = request.POST.getlist('engineers[]')
+        best = BestEngineer(month=int(month))
+        best.save()
+        for eng in engineers:
+            eng_obj = User.objects.get(pk=eng)
+            best.engineer.add(eng_obj)
+        for out in outdoors:
+            out_obj = User.objects.get(pk=out)
+            best.engineer.add(out_obj)
+        if best.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})

@@ -77,9 +77,9 @@
       <div class="container">
 
         <div class="text-center">
-          <h3 class="body-font">ابدأ العمل</h3>
+          <h3 class="body-font">اطلب خدمتك</h3>
           <p class="body-font"> انضم لشبكة عملائنا المميزين.</p>
-          <a class="cta-btn body-font" href="{% url 'engineer-online-list' %}">إيدأ</a>
+          <a class="cta-btn body-font" href="{% url 'engineer-online-list' %}">اطلب خدمه</a>
         </div>
 
       </div>
@@ -88,14 +88,15 @@
    <section id="team" class="team">
       <div class="container">
 
-        <div class="section-title">
+        <div class="section-title" id="eng">
           <h2 class="body-font">فريقنا</h2>
-          <h3 class="body-font"> مهندسون سعوديون</h3>
+          <h3 class="body-font">  افضل مهندسين هذا الشهر</h3>
         </div>
 
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+       {% if bests.count == 0  or bests.count > 6 %}
+               <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
               <div class="member-img">
                 <img src="{% static 'images/team1.png' %}" class="img-fluid" alt="">
@@ -148,7 +149,30 @@
               </div>
             </div>
           </div>
+           {% else %}
+           {% for best in bests %}
+{% for eng in best.engineer.all %}
+                   <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static eng.profile_pic.url  %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4 class="body-font">{{ eng.first_name }} {{ eng.last_name }}</h4>
+                <span class="body-font">مهندس</span>
+              </div>
+            </div>
+          </div>
 
+    {% endfor %}
+{% endfor %}
+       {% endif %}
 
         </div>
 
@@ -169,7 +193,7 @@
       <div class="container">
           <div class="row mt-5">
 
-          <div class="col-lg-4">
+          <div class="col-lg-3">
             <div class="info">
               <div class="address">
                 <i class="icofont-google-map"></i>
@@ -183,16 +207,16 @@
 
               <div class="phone">
                 <i class="icofont-phone"></i>
-                <p class="body-font">966549858385</p>
+                <p class="body-font">966 58 191 5102</p>
               </div>
 
             </div>
 
           </div>
               <div class="col-lg-6">
-<div class="card">
+<div class="card join">
     <div class="card-body justify-content-center">
-        <center> <h5 class="body-font text-mandigo">إنضم لشبكة عملاء باوهاوس</h5></center>
+        <center> <h5 class="body-font ">إنضم لشبكة عملاء باوهاوس</h5></center>
         <hr/>
                 <center> <a class="btn btn-mandigo body-font text-white" href="{% url 'register-customer' %}">انضم</a></center>
 
@@ -207,3 +231,15 @@
   </main>
 
 {% endblock content %}
+
+{% block javascript %}
+
+<script>
+$(() => {
+   $("#eng").on('click', event => {
+      event.preventDefault();
+      window.location.href = '{% url 'engineer-online-list' %}';
+   });
+});
+</script>
+{% endblock javascript %}

@@ -98,6 +98,10 @@
 }
 
 /*------------------------- END Core Css -------------------*/
+@font-face {
+  font-family: "ae-almohanad";
+  src: url("../fonts/ae-almohanad.ttf");
+}
 
 
 /*-------------------- 2.1 Sidebar Menu -------------------*/
@@ -818,7 +822,7 @@ ul.breadcrumbs {
 }
 
 .text-cursive {
-    font-family: "Indie Flower", cursive !important;
+    font-family: "ae-almohanad",  sans-serif !important;
 }
 
 .text-red {
@@ -1352,7 +1356,7 @@ table.dbkit-table tr td {
 }
 
 .body-font {
-font-family: 'Cairo', sans-serif;
+font-family: ' "ae-almohanad"', sans-serif;
     font-size: medium;
     font-weight: bold;
 }

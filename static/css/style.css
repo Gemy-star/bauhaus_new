@@ -221,6 +221,13 @@ h1, h2, h3, h4, h5, h6 {
     color: #784d9f;
 }
 
+
+@font-face {
+  font-family: "ae-almohanad";
+  src: url("../assets/fonts/ae-almohanad.ttf");
+}
+
+
 @media (max-width: 1366px) {
     .nav-menu .drop-down .drop-down ul {
         left: -90%;
@@ -341,22 +348,26 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-nav-active .mobile-nav-toggle i {
     color: #fff;
 }
-
+.join {
+        background-image: url("../images/register.png");
+    background-size: contain;
+    object-fit: cover;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
     width: 100%;
-    height: 100vh;
-    background: url("../../static/images/h1_hero.png") top center;
-    background-size: contain;
-    position: center;
-      object-fit: cover;
+  height: 100vh;
+  background-size: cover;
+  position: relative;
+    background: url("../../static/images/home_bg.png") top center;
+  object-fit: cover;
 
 }
 
 .body-font {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'ae-almohanad', sans-serif;
 
 }
 
@@ -371,10 +382,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .hero-container {
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
+position: absolute;
+    bottom: 65;
+    top: 7;
+    left: 5;
     right: 0;
     display: flex;
     justify-content: center;
@@ -382,6 +393,7 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     text-align: center;
     padding: 0 15px;
+
 }
 
 #hero h3 {
@@ -708,7 +720,7 @@ section {
 }
 
 .cus .cta-btn {
-    font-family: "cairo", sans-serif;
+    font-family: "Cairo", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 16px;

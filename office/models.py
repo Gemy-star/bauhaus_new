@@ -70,4 +70,32 @@ class Reply(models.Model):
         verbose_name_plural = 'ردود على عميل'
 
     def __str__(self):
-        return self.engineer.first_name
+        return self.sender.first_name
+
+
+class BestEngineer(models.Model):
+    engineer = models.ManyToManyField(User, null=True, verbose_name='المهندس')
+    MONTH_CHOICES = (
+        (1, 'يناير'),
+        (2, 'فبراير'),
+        (3, 'مارس'),
+        (4, 'إبريل'),
+        (5, 'مايو'),
+        (6, 'يونيو'),
+        (7, 'يوليو'),
+        (8, 'أغسطس'),
+        (9, 'سبمتمبر'),
+        (10, 'أكتوبر'),
+        (11, 'نوفمبر'),
+        (12, 'ديسمبر'),
+    )
+    month = models.SmallIntegerField(blank=True, null=True, choices=MONTH_CHOICES, verbose_name='الشهر')
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        ordering = ['month', ]
+        verbose_name = ' افضل مهندسين - الشهر'
+        verbose_name_plural = 'افضل مهندسين - الشهر'
+
+    def __str__(self):
+        return str(self.month)

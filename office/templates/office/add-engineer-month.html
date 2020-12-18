@@ -1,0 +1,109 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %} إضافة مهندسين الشهر  {% endblock title %}
+
+
+{% block body %}
+
+ <div class="main-content-inner">
+      <div class="row">
+          <div class="card center">
+              <div class="card-body">
+             <form method="post">
+                 {% csrf_token %}
+                 <div class="form-group row">
+             <label for="engineers" class="body-font">إختر المهندس</label>
+
+<select class="form-control body-font" multiple name="engineers" id="engineers" >
+  {% for eng in engineers %}
+    <option class="body-font" value="{{ eng.pk }}">{{ eng.first_name }} {{ eng.last_name }}</option>
+  {% endfor %}
+  {% for eng in admins %}
+    <option class="body-font" value="{{ eng.pk }}">{{ eng.first_name }} {{ eng.last_name }}</option>
+  {% endfor %}
+</select>
+                 </div>
+                 <div class="form-group row">
+             <label for="outdoors" class="body-font"> لإختر المهندس الغير معتدمين</label>
+
+<select multiple class="form-control body-font" name="outdoors" id="outdoors" >
+  {% for eng in outdoors %}
+    <option class="body-font" value="{{ eng.pk }}">{{ eng.first_name }} {{ eng.last_name }}</option>
+  {% endfor %}
+
+</select>
+                 </div>
+             <div class="form-group row">
+                            <label for="month" class="body-font"> اختر الشهر</label>
+
+<select  class="form-control body-font" name="month" id="month" >
+    <option class="body-font" value="1">يناير</option>
+    <option class="body-font" value="2">فبراير</option>
+    <option class="body-font" value="3">مارس</option>
+    <option class="body-font" value="4">إبريل</option>
+    <option class="body-font" value="5">مايو</option>
+    <option class="body-font" value="6">يونيو</option>
+    <option class="body-font" value="7">يوليو</option>
+    <option class="body-font" value="8">أغسطس</option>
+    <option class="body-font" value="9">سبمتمبر</option>
+    <option class="body-font" value="10">أكتوبر</option>
+    <option class="body-font" value="11">نوفمبر</option>
+    <option class="body-font" value="12">ديسمبر</option>
+
+</select>
+             </div>
+   <center><input type="submit" id="btn_best" name="btn_best" class="btn btn-mandigo body-font" value="إضافه"></center>
+             </form>
+
+              </div>
+
+          </div>
+      </div>
+</div>
+
+{% endblock body %}
+
+{% block javascript %}
+<script>
+$(() => {
+    $("#btn_best").on('click', event => {
+       event.preventDefault();
+       $.ajax({
+                    method: 'POST',
+                    url: '{% url 'engineer-best' %}',
+                    data: {
+                        'engineers': $('#engineers').val(),
+                        'outdoors': $('#outdoors').val(),
+                        'month': $('#month').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        if (data.data === 1) {
+                            swal({
+                                title: "تم",
+                                text: "تم  بنجاح",
+                                icon: "success",
+                                button: "إغلاق",
+                            });
+                            window.location.href = "{% url 'home-engineer' %}"
+                        } else {
+                            swal({
+                                title: "خطا",
+                                text: "من فضلك راجع البيانات",
+                                icon: "error",
+                                button: "إغلاق",
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+    });
+});
+
+</script>
+
+
+{% endblock javascript %}

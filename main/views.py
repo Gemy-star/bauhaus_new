@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from .models import Contact
 from django.http import JsonResponse
+from office.models import BestEngineer
+from datetime import datetime
 
 
 def home_page(request):
-    return render(request, 'main/home_page.html')
+    today = datetime.today()
+    bests = BestEngineer.objects.filter(month=today.month, date_added__year=today.year)
+    context = {"bests": bests}
+    return render(request, 'main/home_page.html', context=context)
 
 
 def contact_ajax(request):
@@ -26,4 +31,4 @@ def faq_questions(request):
 
 
 def contact_page(request):
-    return render(request,'main/contact-page.html')
+    return render(request, 'main/contact-page.html')
