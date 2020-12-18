@@ -361,8 +361,8 @@ h1, h2, h3, h4, h5, h6 {
   height: 100vh;
   background-size: cover;
   position: relative;
-    background: url("../../static/images/home_bg.png") top center;
-  object-fit: cover;
+    background: url("../../static/images/home.png") top center;
+  object-fit: contain;
 
 }
 
