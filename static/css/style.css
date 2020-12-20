@@ -119,11 +119,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu a {
-    display: block;
+        display: block;
     position: relative;
     color: #784d9f;
     transition: 0.3s;
-    font-size: 15px;
+    font-size: 23px;
     padding: 0 4px;
     letter-spacing: 0.4px;
 }
@@ -227,6 +227,29 @@ h1, h2, h3, h4, h5, h6 {
   src: url("../assets/fonts/ae-almohanad.ttf");
 }
 
+
+
+@font-face {
+  font-family: "sultan-art";
+  src: url("../assets/fonts/sultan-art.ttf");
+}
+
+
+@font-face {
+  font-family: "AraHamahAlislam-Regular-1";
+  src: url("../assets/fonts/AraHamahAlislam-Regular-1.ttf");
+}
+.aida_font {
+    font-family: "AraHamahAlislam-Regular-1" ;
+
+}
+
+
+
+.bauhaus_font {
+    font-family: "sultan-art" ;
+
+}
 
 @media (max-width: 1366px) {
     .nav-menu .drop-down .drop-down ul {
@@ -361,7 +384,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 100vh;
   background-size: cover;
   position: relative;
-    background: url("../../static/images/home.png") top center;
+    background: url("../../static/images/aida_home.png") top center;
   object-fit: contain;
 
 }
@@ -382,37 +405,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .hero-container {
-position: absolute;
-    bottom: 65;
-    top: 7;
-    left: 5;
-    right: 0;
+    position: absolute;
+    bottom: 65px;
+    top: 7px;
+    left: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
     padding: 0 15px;
-
 }
 
 #hero h3 {
-    background: rgba(255, 255, 255, 0.1);
-    color: #0b0b0b;
-    font-size: 26px;
-    padding: 10px 30px;
-    margin-bottom: 30px;
+ color: #0b0b0b;
+    font-size: 40px;
     border-radius: 50px;
 }
 
 #hero h1 {
-    margin: 0 0 10px 0;
-    font-size: 48px;
+       font-size: 70px;
     font-weight: 700;
     line-height: 56px;
     text-transform: uppercase;
     color: #0b0b0b;
 }
+
 
 #hero h2 {
     color: #0b0b0b;
@@ -2049,7 +2067,7 @@ section {
     color: #444444;
     font-size: 14px;
     opacity: 0.8;
-    background: url("../images/h1_hero2.png") center / cover;
+    background: url("../images/footer.png") center / cover;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 

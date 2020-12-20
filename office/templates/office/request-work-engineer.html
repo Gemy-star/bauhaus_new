@@ -6,7 +6,7 @@
 <main id="main">
        <div class="ftco-blocks-cover-1">
        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
-      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/bauhaus1.png')">
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/section_bg01.png')">
         <div class="container">
           <div class="row align-items-center ">
 
@@ -40,6 +40,15 @@
                       <textarea id="request" name="request" class="form-control" placeholder="اكتب تفاصيل العمل"></textarea>
                     </div>
                   </div>
+                                  <div class="row">
+                    <div class="col form-group">
+                        <label class="body-font" for="service">أختر نوع الخدمه</label>
+<select  class="form-control body-font" name="service" id="service">
+    <option class="body-font" value="1">طلب عمل</option>
+  <option class="body-font" value="2">طلب مقايسه</option>
+</select>
+                    </div>
+                  </div>
                   <button type="submit" id="btn_req" class="btn btn-mandigo">إرسال</button>
 
                 </form>
@@ -67,6 +76,7 @@ $(()=>{
                     url: '{% url 'cus-request-eng' engineer.pk %}',
                     data: {
                         'request': $('#request').val(),
+                        'service':$("#service").val(),
                         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
                     },
                     success: function (data) {

@@ -64,6 +64,9 @@
                               {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 4 %}
                             <a class="body-font" href="{% url 'engineer-inbox' %}"><i class="icofont-envelope"></i> الرسائل</a>
                             {% endif %}
+                           {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 4 %}
+                            <a class="body-font" href="{% url 'add-info' %}">ضف معلوماتك</a>
+                            {% endif %}
                         </div>
                         </div>
                     </div>

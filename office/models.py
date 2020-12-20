@@ -15,6 +15,12 @@ class EngineerStatus(models.Model):
 
 
 class RequestWorkOfEngineer(models.Model):
+    SERVICES_CHOICES = (
+        (1, 'طلب عمل'),
+        (2, 'طلب مقايسه')
+
+    )
+    service = models.SmallIntegerField(blank=True, null=True, choices=SERVICES_CHOICES, verbose_name='نوع الطلب')
     customer_email = models.EmailField(max_length=255, blank=True, null=True, verbose_name='الأسم')
     request = models.TextField(verbose_name='الطلب', blank=True, null=True)
     engineer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='مهندس')
@@ -30,6 +36,12 @@ class RequestWorkOfEngineer(models.Model):
 
 
 class RequestWorkOfCustomer(models.Model):
+    SERVICES_CHOICES = (
+        (1, 'طلب عمل'),
+        (2, 'طلب مقايسه')
+
+    )
+    service = models.SmallIntegerField(blank=True, null=True, choices=SERVICES_CHOICES, verbose_name='نوع الطلب')
     engineer_email = models.EmailField(max_length=255, blank=True, null=True, verbose_name='م/البريد الألكترونى')
     request = models.TextField(verbose_name='الطلب', blank=True, null=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='عميل')
@@ -45,6 +57,12 @@ class RequestWorkOfCustomer(models.Model):
 
 
 class Work(models.Model):
+    SERVICES_CHOICES = (
+        (1, 'طلب عمل'),
+        (2, 'طلب مقايسه')
+
+    )
+    service = models.SmallIntegerField(blank=True, null=True, choices=SERVICES_CHOICES, verbose_name='نوع الطلب')
     request = models.TextField(verbose_name='الطلب', blank=True, null=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='عميل')
     date_added = models.DateTimeField(auto_now_add=True, verbose_name='تاريخ الأضافه')
@@ -99,3 +117,20 @@ class BestEngineer(models.Model):
 
     def __str__(self):
         return str(self.month)
+
+
+class EngineerInformation(models.Model):
+    cv = models.FileField(upload_to='uploads/', null=True, blank=True, verbose_name="السى فى ")
+    min_pay = models.IntegerField(null=True, blank=True, verbose_name='اق سعر')
+    max_pay = models.IntegerField(null=True, blank=True, verbose_name='أكثر سعر')
+    certificate = models.FileField(upload_to='uploads/', null=True, blank=True, verbose_name='شهادة التخرج')
+    engineer = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='المهندس')
+    detail = models.TextField(null=True, blank=True, verbose_name='نبذه')
+
+    class Meta:
+        ordering = ['engineer', ]
+        verbose_name = ' بيانات اضافيه - مهندس'
+        verbose_name_plural = 'افضل مهندسين - الشهر'
+
+    def __str__(self):
+        return self.engineer.first_name

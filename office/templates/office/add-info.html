@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+
+
+{% block title %}  بيانات إضافيه  {% endblock title  %}
+
+
+
+{% block content %}
+<main id="main">
+       <div class="ftco-blocks-cover-1">
+       <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+      <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/login_bg.png')">
+        <div class="container">
+          <div class="row align-items-center ">
+
+            <div class="col-md-5 mt-5 pt-5">
+              <h1 class="mb-3 font-weight-bold body-font"> بيانات إضافيه</h1>
+              <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong>  بيانات إضافيه </strong></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+   <section id="about" class="about">
+            <div class="container">
+                             <div class="section-title">
+          <h2 class="body-font text-mandigo">  بيانات إضافيه</h2>
+        </div>
+<form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    <div class="form-group row">
+        <div class="col-12">
+            <input type="file" id="cv" name="cv" class="form-control" placeholder="السى فى">
+        </div>
+    </div>
+                    <div class="col-12 form-group">
+                      <textarea id="detail" name="detail" class="form-control body-font" placeholder="اكتب نبذه شخصيه"></textarea>
+                    </div>
+    <div class="form-group row">
+        <div class="col-6">
+            <input type="number" class="form-control body-font" name="min_pay" id="min_pay" placeholder="الحد الأدنى للعمل">
+        </div>
+               <div class="col-6">
+            <input type="number" class="form-control body-font" name="max_pay" id="max_pay" placeholder="الحد الأقصى للعمل">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12">
+   <div class="col-12">
+            <input type="file" id="cer" name="cer" class="form-control body-font" placeholder="الشهادات الحاصل عليها">
+        </div>
+        </div>
+    </div>
+
+</form>
+
+            </div>
+   </section>
+</main>
+
+
+{% endblock content %}

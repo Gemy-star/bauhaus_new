@@ -23,6 +23,16 @@
         <hr/>
         <h3 class="body-font text-mandigo">تاريخ التقديم</h3>
         <p class="body-font">{{ req.date_added.date }}</p>
+        <hr/>
+            <h3 class="body-font text-mandigo">نوع الخدمه</h3>
+        {% if req.service == 1 %}
+                <p class="body-font">طلب عمل</p>
+
+        {% endif %}
+     {% if req.service == 2 %}
+                <p class="body-font">طلب مقايسه</p>
+
+        {% endif %}
     </div>
     <div class="card-footer">
         <a class="btn btn-mandigo body-font" href="{% url 'send-to-customer' req.customer_email %}"> الرد</a>

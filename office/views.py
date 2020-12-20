@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Work, Reply, BestEngineer
+from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Work, Reply, BestEngineer, \
+    EngineerInformation
 from accounts.models import User
 from django.http import JsonResponse
+from django.core.files.storage import FileSystemStorage
 
 
 def engineer_online_list(request):
@@ -16,8 +18,11 @@ def request_work_engineer(request, pk):
         return render(request, 'office/request-work-engineer.html', context={"engineer": engineer})
     elif request.method == 'POST' and request.is_ajax:
         req = request.POST.get('request')
-        req_obj_eng = RequestWorkOfEngineer(customer_email=cus_obj.email, request=req, engineer=engineer)
-        req_obj_cus = RequestWorkOfCustomer(engineer_email=engineer.email, request=req, customer=cus_obj)
+        service = request.POST.get('service')
+        req_obj_eng = RequestWorkOfEngineer(customer_email=cus_obj.email, service=int(service), request=req,
+                                            engineer=engineer)
+        req_obj_cus = RequestWorkOfCustomer(engineer_email=engineer.email, service=int(service), request=req,
+                                            customer=cus_obj)
         req_obj_eng.save()
         req_obj_cus.save()
         if req_obj_eng.pk:
@@ -103,3 +108,21 @@ def best_engineer(request):
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
+
+
+def add_info(request):
+    if request.method == 'GET':
+        return render(request, 'office/add-info.html')
+    elif request.method == 'POST':
+        cv = request.FILES['cv']
+        fs = FileSystemStorage()
+        fs.save(cv.name, cv)
+        cer = request.FILES['cer']
+        fs.save(cer.name, cer)
+        detail = request.POST.get('detail')
+        min_pay = request.POST.get('min_pay')
+        max_pay = request.POST.get('max_pay')
+        engineer = User.objects.get(pk=request.user.pk)
+        info_obj = EngineerInformation(engineer=engineer, cv=cv, detail=detail, certificate=cer, min_pay=min_pay,
+                                       max_pay=max_pay)
+        info_obj.save()

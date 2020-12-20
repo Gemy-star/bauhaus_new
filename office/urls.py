@@ -11,5 +11,6 @@ urlpatterns = [
     path('customer/inbox',views.customer_messages_list , name='customer-inbox'),
     path('engineer/inbox', views.engineer_messgae_list, name='engineer-inbox'),
     path('engineer/best', views.best_engineer, name='engineer-best'),
+    path('engineer/info', views.add_info, name='add-info'),
 
 ]
