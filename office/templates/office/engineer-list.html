@@ -27,11 +27,12 @@
 
         <div class="row">
 
-          <div class="col-lg-8 entries">
+          <div class="col-lg-12 entries">
 
             <div class="row">
                 {% for eng in engineers %}
-                            <article class="entry">
+                    <div class="col-4">
+                                                <article class="entry">
 
                   <div class="entry-img">
                     <img src="{% static eng.engineer.profile_pic.url %}" alt="" class="profile-pic">
@@ -70,13 +71,15 @@
                   </div>
 
                 </article><!-- End blog entry -->
-              </div>
+
+                    </div>
+
 
                 {% endfor %}
+               </div>
             </div>
           </div>
         </div>
-      </div>
  </section>
 
 </main>

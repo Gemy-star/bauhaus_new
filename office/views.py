@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Work, Reply, BestEngineer, \
-    EngineerInformation
+from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Reply, BestEngineer, Service, \
+    EngineerInformation, Survey
 from accounts.models import User
 from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
@@ -14,14 +14,19 @@ def engineer_online_list(request):
 def request_work_engineer(request, pk):
     engineer = User.objects.get(pk=pk)
     cus_obj = User.objects.get(pk=request.user.pk)
+    cats = Service.objects.all()
     if request.method == 'GET':
-        return render(request, 'office/request-work-engineer.html', context={"engineer": engineer})
+        return render(request, 'office/request-work-engineer.html', context={"engineer": engineer, "cats": cats})
     elif request.method == 'POST' and request.is_ajax:
         req = request.POST.get('request')
         service = request.POST.get('service')
-        req_obj_eng = RequestWorkOfEngineer(customer_email=cus_obj.email, service=int(service), request=req,
+        cat = request.POST.get('cat')
+        cat_obj = Service.objects.get(pk=cat)
+        req_obj_eng = RequestWorkOfEngineer(customer_email=cus_obj.email, category=cat_obj, service=int(service),
+                                            request=req,
                                             engineer=engineer)
-        req_obj_cus = RequestWorkOfCustomer(engineer_email=engineer.email, service=int(service), request=req,
+        req_obj_cus = RequestWorkOfCustomer(engineer_email=engineer.email, category=cat_obj, service=int(service),
+                                            request=req,
                                             customer=cus_obj)
         req_obj_eng.save()
         req_obj_cus.save()
@@ -126,3 +131,16 @@ def add_info(request):
         info_obj = EngineerInformation(engineer=engineer, cv=cv, detail=detail, certificate=cer, min_pay=min_pay,
                                        max_pay=max_pay)
         info_obj.save()
+
+
+def cycle_request(request):
+    if request.method == 'POST' and request.is_ajax:
+        about = request.POST.get('about')
+        color = request.POST.get('color')
+        user = User.objects.get(pk=request.user.pk)
+        sur_obj = Survey(about=about, color=color, customer=user)
+        sur_obj.save()
+        if sur_obj.pk:
+            return JsonResponse({"data": 1})
+        else:
+            return JsonResponse({"data": -1})

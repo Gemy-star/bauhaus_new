@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from .models import Contact
 from django.http import JsonResponse
-from office.models import BestEngineer
+from office.models import BestEngineer, Service
 from datetime import datetime
 
 
 def home_page(request):
     today = datetime.today()
     bests = BestEngineer.objects.filter(month=today.month, date_added__year=today.year)
-    context = {"bests": bests}
+    services = Service.objects.all()
+    context = {"bests": bests, "services": services}
     return render(request, 'main/home_page.html', context=context)
 
 

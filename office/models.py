@@ -14,12 +14,26 @@ class EngineerStatus(models.Model):
         return self.engineer.first_name
 
 
+class Service(models.Model):
+    name = models.CharField(max_length=255, null=True, verbose_name='الأسم')
+    description = models.TextField(null=True, blank=True, verbose_name='التفاصيل')
+
+    class Meta:
+        ordering = ['name', ]
+        verbose_name = 'الخدمه'
+        verbose_name_plural = 'الخدمات'
+
+    def __str__(self):
+        return self.name
+
+
 class RequestWorkOfEngineer(models.Model):
     SERVICES_CHOICES = (
         (1, 'طلب عمل'),
         (2, 'طلب مقايسه')
 
     )
+    category = models.ForeignKey(Service, null=True, on_delete=models.CASCADE, blank=True, verbose_name='الخدمه')
     service = models.SmallIntegerField(blank=True, null=True, choices=SERVICES_CHOICES, verbose_name='نوع الطلب')
     customer_email = models.EmailField(max_length=255, blank=True, null=True, verbose_name='الأسم')
     request = models.TextField(verbose_name='الطلب', blank=True, null=True)
@@ -41,6 +55,7 @@ class RequestWorkOfCustomer(models.Model):
         (2, 'طلب مقايسه')
 
     )
+    category = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, blank=True, verbose_name='الخدمه')
     service = models.SmallIntegerField(blank=True, null=True, choices=SERVICES_CHOICES, verbose_name='نوع الطلب')
     engineer_email = models.EmailField(max_length=255, blank=True, null=True, verbose_name='م/البريد الألكترونى')
     request = models.TextField(verbose_name='الطلب', blank=True, null=True)
@@ -62,6 +77,7 @@ class Work(models.Model):
         (2, 'طلب مقايسه')
 
     )
+    category = models.ForeignKey(Service, null=True, on_delete=models.CASCADE, blank=True, verbose_name='الخدمه')
     service = models.SmallIntegerField(blank=True, null=True, choices=SERVICES_CHOICES, verbose_name='نوع الطلب')
     request = models.TextField(verbose_name='الطلب', blank=True, null=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='عميل')
@@ -134,3 +150,12 @@ class EngineerInformation(models.Model):
 
     def __str__(self):
         return self.engineer.first_name
+
+
+class Survey(models.Model):
+    color = models.CharField(max_length=255, null=True, blank=True, verbose_name='اللون المفضل')
+    about = models.TextField(null=True, blank=True, verbose_name='نبذه')
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='عميل')
+
+    def __str__(self):
+        return self.customer.first_name
