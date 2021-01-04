@@ -19,25 +19,17 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a href="{% url 'user-detail' %}" class="body-font" >الملف الشخصى</a>
                          <a href="{% url 'logout' %}" class="body-font">خروج</a>
-                            {% if request.user.user_type == 3 %}
-                                 <div class="dropdown-divider"></div>
-                         <a href="{% url 'engineer-online-list' %}" class="body-font"> المهندسين</a>
-
-                            {% endif %}
 
 
 
                         </div>
                     </li>
-                    {% if request.user.user_type is None %}
+                    {% if request.user.first_name %}
                     <li class="body-font"><a href="{% url 'login' %}" class="body-font">تسجيل الدخول</a></li>
                 {% endif %}
-              {% if request.user.user_type ==  3 %}
-                    <li class="body-font"><a href="" class="body-font"> اطلب خدمتك</a></li>
-
-                {% endif %}
+                    <li class="body-font"><a href="{% url 'engineer-online-list' %}" class="body-font"> اطلب خدمتك</a></li>
                         <li class="body-font"><a href="{% url 'faq-questions' %}" class="body-font">الأسئله المتكرره</a></li>
-                <li class="body-font"><a href="#" class="body-font">عن باوهاوس</a></li>
+                <li class="body-font"><a href="{% url 'about-page' %}" class="body-font">عن باوهاوس</a></li>
                 <li class="active body-font"><a href="{% url 'home-page' %}" class="body-font"> الرئيسيه</a></li>
 
 {#            </ul>#}

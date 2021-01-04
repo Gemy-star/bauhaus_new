@@ -375,6 +375,11 @@ h1, h2, h3, h4, h5, h6 {
         background-image: url("../images/register.png");
     background-size: contain;
     object-fit: cover;
+
+}
+.head-size {
+    font-size: 30px;
+    font-weight: bold;
 }
 /*--------------------------------------------------------------
 # Hero Section
@@ -384,7 +389,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 100vh;
   background-size: cover;
   position: relative;
-    background: url("../../static/images/aida_home.png") top center;
+    background: url("../../static/images/home_aida.png") top center;
   object-fit: contain;
 
 }
@@ -556,7 +561,7 @@ section {
 }
 
 .section-title h2 {
-    font-size: 13px;
+    font-size: 30px;
     letter-spacing: 1px;
     font-weight: 700;
     padding: 8px 20px;
@@ -2084,6 +2089,12 @@ section {
     background-image: url("../images/h1_hero2.png") !important; ;
      background-size: cover !important;
     object-fit: fill !important;
+}
+#faq-sec {
+  color: #444444 !important;
+  font-size: 14px !important;
+  background: #f6f4f4 !important;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1) !important;
 }
 
 

@@ -8,9 +8,13 @@ from datetime import datetime
 def home_page(request):
     today = datetime.today()
     bests = BestEngineer.objects.filter(month=today.month, date_added__year=today.year)
-    services = Service.objects.all()
-    context = {"bests": bests, "services": services}
+    context = {"bests": bests, }
     return render(request, 'main/home_page.html', context=context)
+
+
+def about_page(request):
+    services = Service.objects.all()
+    return render(request, 'main/about_page.html', context={"services": services})
 
 
 def contact_ajax(request):
