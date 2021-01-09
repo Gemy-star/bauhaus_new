@@ -8,10 +8,8 @@
             <ul>
                 <li><a class="google-plus" href="https://wa.me/966581915102/"><i class="fa fa-whatsapp fa-lg" aria-hidden="true"></i></a></li>
                         <li class="body-font"> <a href="{% url 'contact-page' %}" class="body-font">تواصل معنا</a></li>
-  {% if request.user.user_type !=  1 and  request.user.user_type !=  2 and request.user.user_type !=  3 %}
-                    <li  class="body-font"><a href="{% url 'register-customer' %}" class="body-font" >إنشاء حساب</a></li>
-                {% endif %}
-  <li class="nav-item dropdown">
+                   {% if request.user.first_name %}
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle body-font" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             الصفحه الشخصيه
@@ -24,9 +22,11 @@
 
                         </div>
                     </li>
-                    {% if request.user.first_name %}
+ {%  else  %}
+                       <li  class="body-font"><a href="{% url 'register-customer' %}" class="body-font" >إنشاء حساب</a></li>
                     <li class="body-font"><a href="{% url 'login' %}" class="body-font">تسجيل الدخول</a></li>
-                {% endif %}
+
+             {% endif %}
                     <li class="body-font"><a href="{% url 'engineer-online-list' %}" class="body-font"> اطلب خدمتك</a></li>
                         <li class="body-font"><a href="{% url 'faq-questions' %}" class="body-font">الأسئله المتكرره</a></li>
                 <li class="body-font"><a href="{% url 'about-page' %}" class="body-font">عن باوهاوس</a></li>

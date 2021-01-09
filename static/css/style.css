@@ -381,6 +381,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 30px;
     font-weight: bold;
 }
+
+.sub-size {
+    font-size: 25px;
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -390,7 +394,7 @@ h1, h2, h3, h4, h5, h6 {
   background-size: cover;
   position: relative;
     background: url("../../static/images/home_aida.png") top center;
-  object-fit: contain;
+  object-fit: cover;
 
 }
 
@@ -412,7 +416,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero .hero-container {
   position: absolute;
   bottom: 0;
-  top: 0;
+  top: -118px;
   left: 0;
   right: 0;
   display: flex;
