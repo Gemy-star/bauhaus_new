@@ -13,5 +13,4 @@ urlpatterns = [
     path('change-status/<int:pk>', views.change_status, name='change-status'),
     path('engineer/<int:pk>', views.engineer_detail, name='engineer-detail'),
     path('emp-info', views.emp_info, name='emp-info'),
-
 ]

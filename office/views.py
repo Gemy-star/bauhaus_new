@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Reply, BestEngineer, Service, \
-    EngineerInformation, Survey
+    EngineerInformation, Survey, EtlobService
 from accounts.models import User
 from django.http import JsonResponse
 from django.core.files.storage import FileSystemStorage
@@ -9,6 +9,32 @@ from django.core.files.storage import FileSystemStorage
 def engineer_online_list(request):
     context = {"engineers": EngineerStatus.objects.filter(status=1)}
     return render(request, 'office/engineer-list.html', context=context)
+
+
+def services(request):
+    services = Service.objects.all()
+    return render(request, 'office/services.html', context={"services": services})
+
+
+def etlob_service(request):
+    if request.method == 'POST' and request.FILES['image']:
+        name = request.POST.get('name')
+        ser = request.POST.get('ser')
+        ser_obj = Service.objects.get(pk=ser)
+        age = request.POST.get('age')
+        color = request.POST.get('color')
+        about = request.POST.get('about')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        image = request.FILES['image']
+        fs = FileSystemStorage()
+        fs.save(image.name, image)
+        etlob = EtlobService(name=name, image=image, address=address, phone=phone, color=color, about=about, age=age,
+                             service=ser_obj)
+        etlob.save()
+        if etlob is not None:
+            return redirect('home-page')
+    return render(request, 'office/etlob-service.html')
 
 
 def request_work_engineer(request, pk):

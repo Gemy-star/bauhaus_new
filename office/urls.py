@@ -13,5 +13,7 @@ urlpatterns = [
     path('engineer/best', views.best_engineer, name='engineer-best'),
     path('engineer/info', views.add_info, name='add-info'),
     path('request/cycle', views.cycle_request, name='cycle-request'),
+    path('services/all', views.services, name='services-all'),
+    path('etlob', views.etlob_service, name='etlob'),
 
 ]

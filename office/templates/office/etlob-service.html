@@ -1,9 +1,8 @@
 {% extends 'main.html' %}
 
-{% block title %} تسجيل الدخول {% endblock title %}
 
 {% block content %}
-    <main id="main">
+<main id="main">
        <div class="ftco-blocks-cover-1">
        <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
       <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('../../../static/images/section_bg01.png')">
@@ -11,8 +10,8 @@
           <div class="row align-items-center ">
 
             <div class="col-md-5 mt-5 pt-5">
-              <h1 class="mb-3 font-weight-bold body-font">إنشاء حساب</h1>
-              <p><a href="{% url 'home-page' %}" class="body-font text-white">الرئيسيه</a> <span class="mx-3">/</span> <strong>إنشاء حساب </strong></p>
+              <h1 class="mb-3 font-weight-bold body-font">اطلب خدمة</h1>
+              <p><a href="{% url 'home-page' %}" class="body-font">الرئيسيه</a> <span class="mx-3">/</span> <strong> عن باوهاوس </strong></p>
             </div>
 
           </div>
@@ -21,39 +20,46 @@
     </div>
         <section id="about" class="about">
             <div class="container">
-                                       <center> <h5 class="body-font text-mandigo">مرحبا فى باوهاوس</h5></center>
-<hr/>
-<hr/>
-                                             <div class="section-title">
-          <h2 class="body-font text-mandigo">إنشاء حساب </h2>
+                             <div class="section-title">
+          <h2 class="body-font text-mandigo"> إطلب خدمة </h2>
         </div>
-
                             <div class="row">
 <div class="col-md-12">
     <div class="card">
     <div class="card-body">
            <center>
-                            <form action="#" enctype="multipart/form-data" method="post" role="form" class="php-email-form">
+                            <form  method="post" enctype="multipart/form-data" >
                         {% csrf_token %}
+                                <div id="hide">
+
+                                </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <input type="text" name="first_name" class="form-control body-font" id="first_name" placeholder="الأسم"
+                                <input type="text" name="name" class="form-control body-font" id="name" placeholder="الأسم"
                                        data-rule="minlen:4" data-msg="الأسم"/>
                                 <div class="validate"></div>
                             </div>
                             <div class="col-md-6 form-group">
-                                  <input type="text" name="last_name" class="form-control body-font" id="last_name" placeholder="اللقب"
-                                       data-rule="minlen:4" data-msg="اللقب"/>
+                                  <input type="number" name="age" class="form-control body-font"  id="age" placeholder="العمر"
+                                       data-rule="minlen:4" data-msg=""/>
                                 <div class="validate"></div>
                             </div>
                         </div>
+<div class="row">
+                                                                <div class="col-md-12 form-group">
+                                  <input type="text" name="color" class="form-control body-font"  id="color" placeholder="اللون المفضل"
+                                       data-rule="minlen:4" data-msg=""/>
+                                <div class="validate"></div>
+                            </div>
+
+</div>
                         <div class="form-group">
                             <input type="text" class="form-control body-font" name="address" id="address" placeholder="العنوان"
                                    data-rule="minlen:4" data-msg="العنوان"/>
                             <div class="validate"></div>
                         </div>
                                                                 <div class="form-group">
-                            <input type="file" class="form-control body-font" name="picture" id="picture" placeholder="الصوره"
+                            <input type="file" class="form-control body-font" name="image" id="image" placeholder="الصوره"
                                    data-rule="minlen:4" data-msg="الصوره"/>
                             <div class="validate"></div>
                         </div>
@@ -66,22 +72,18 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <input type="password" name="password" class="form-control body-font" id="password" placeholder="كلمة المرور"
-                                       data-rule="minlen:4" data-msg="كلمة المرور"/>
-                                <div class="validate"></div>
-                            </div>
-                            <div class="col-md-6 form-group">
                                   <input type="text" name="phone" class="form-control body-font" id="phone" placeholder="الهاتف"
                                        data-rule="minlen:4" data-msg="الهاتف"/>
                                 <div class="validate"></div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="loading body-font">من فضلك إنتظر</div>
-                            <div class="error-message body-font"></div>
+      <div class="form-group">
+                            <textarea class="form-control body-font" id="about" name="about" rows="5" data-rule="required"
+                                      data-msg="نبذه عن نفسك" placeholder="نبذه عن نفسك"></textarea>
+                            <div class="validate"></div>
                         </div>
                         <div class="text-center">
-                  <input type="submit" id="submit" name="submit" value="إنشاء" class="btn btn-mandigo body-font"/>
+                  <input type="submit" value="إنشاء" class="btn btn-mandigo body-font text-white"/>
                         </div>
                     </form>
    </center>
@@ -90,11 +92,24 @@
 
 </div>
                 </div>
-
-
             </div>
-
-
         </section>
-    </main>
-        {% endblock content %}
+
+</main>
+
+
+
+{% endblock content %}
+{% block javascript %}
+<script>
+var ser_id;
+$(() =>{
+    ser_id = sessionStorage.getItem('ser_id')
+    console.log(ser_id)
+$("#hide").append(`
+<input type="hidden" name="ser"  id="ser" value="${ser_id}">
+`)
+})
+</script>
+
+{% endblock javascript %}

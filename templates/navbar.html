@@ -24,11 +24,11 @@
                     </li>
  {%  else  %}
                        <li  class="body-font"><a href="{% url 'register-customer' %}" class="body-font" >إنشاء حساب</a></li>
-                    <li class="body-font"><a href="{% url 'login' %}" class="body-font">تسجيل الدخول</a></li>
+                    <li class="body-font"><a href="{% url 'login' %}" class="body-font">تسجيل المهندسين</a></li>
 
              {% endif %}
-                    <li class="body-font"><a href="{% url 'engineer-online-list' %}" class="body-font"> اطلب خدمتك</a></li>
-                        <li class="body-font"><a href="{% url 'faq-questions' %}" class="body-font">الأسئله المتكرره</a></li>
+                        <li class="body-font"><a href="{% url 'faq-questions' %}" class="body-font">اسئلة المتكرره</a></li>
+                               <li class="body-font"><a href="{% url 'services-all' %}" class="body-font"> اطلب خدمتك</a></li>
                 <li class="body-font"><a href="{% url 'about-page' %}" class="body-font">عن باوهاوس</a></li>
                 <li class="active body-font"><a href="{% url 'home-page' %}" class="body-font"> الرئيسيه</a></li>
 

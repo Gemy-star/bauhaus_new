@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import EngineerStatus, RequestWorkOfCustomer, RequestWorkOfEngineer, Work, Reply, Service, BestEngineer ,Survey
+from .models import EngineerStatus, RequestWorkOfCustomer, EtlobService, RequestWorkOfEngineer, Work, Reply, Service, \
+    BestEngineer, Survey
 
 admin.site.register(EngineerStatus)
 admin.site.register(Work)
@@ -9,3 +10,4 @@ admin.site.register(Reply)
 admin.site.register(BestEngineer)
 admin.site.register(Service)
 admin.site.register(Survey)
+admin.site.register(EtlobService)
