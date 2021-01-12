@@ -15,5 +15,7 @@ urlpatterns = [
     path('request/cycle', views.cycle_request, name='cycle-request'),
     path('services/all', views.services, name='services-all'),
     path('etlob', views.etlob_service, name='etlob'),
+    path('dash-service', views.services_dash, name='dash-service'),
+    path('etlob/services/<int:pk>', views.Etlob_service, name='etlob-per-service'),
 
 ]

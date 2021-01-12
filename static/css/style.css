@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo img {
-    max-height: 65px;
+    max-height: 100px;
 }
 
 #header.header-scrolled, #header.header-inner-pages {
@@ -372,6 +372,7 @@ h1, h2, h3, h4, h5, h6 {
         background-image: url("../images/register.png");
     background-size: contain;
     object-fit: cover;
+    opacity: inherit;
 
 }
 .head-size {
@@ -387,8 +388,11 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 
     #hero {
-    width: 100%;
+ width: 100%;
+  max-width: 100%;
   height: 100%;
+        min-width: 100%;
+        min-height: 100%;
   background-size: cover;
         background: url("../../static/images/home_aida.png") top center;
 background-repeat: no-repeat;
@@ -397,7 +401,8 @@ background-repeat: no-repeat;
 
 
 .body-font {
-    font-family: 'ae-almohanad', sans-serif;
+    /*font-family: 'ae-almohanad', sans-serif;*/
+    font-family: 'Almarai', sans-serif;
 
 }
 
@@ -509,12 +514,14 @@ section {
 }
 
 .site-section-cover.overlay {
-    height: 500px;
-    width: 100%;
+  width: 100%;
+  height: auto;
     direction: rtl;
 }
 
 .site-section-cover.overlay:before {
+     width: 100%;
+  height: auto;
     top: 0;
     left: 0;
     right: 0;
@@ -531,6 +538,8 @@ section {
     background-repeat: no-repeat !important;
     background-position: center !important;
        filter: brightness(200%) !important;
+     width: 100%;
+  height: auto;
 
 }
 
@@ -575,7 +584,6 @@ section {
 
 .section-title h2 {
     font-size: 30px;
-    letter-spacing: 1px;
     font-weight: 700;
     padding: 8px 20px;
     line-height: 1;
@@ -588,7 +596,6 @@ section {
 }
 
 .section-title h3 {
-    margin: 15px 0 0 0;
     font-size: 32px;
     font-weight: 700;
 }

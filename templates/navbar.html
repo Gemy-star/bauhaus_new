@@ -3,7 +3,7 @@
 <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-        <a href="{% url 'home-page' %}" class="logo mr-auto"><img src="{% static 'images/main_logo.png' %}"  ></a>
+        <a href="{% url 'home-page' %}" class="logo mr-auto"><img height="900"  src="{% static 'images/main_logo.png' %}"  ></a>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li><a class="google-plus" href="https://wa.me/966581915102/"><i class="fa fa-whatsapp fa-lg" aria-hidden="true"></i></a></li>
@@ -23,7 +23,7 @@
                         </div>
                     </li>
  {%  else  %}
-                       <li  class="body-font"><a href="{% url 'register-customer' %}" class="body-font" >إنشاء حساب</a></li>
+                       <li  class="body-font"><a href="{% url 'register-outdoor' %}" class="body-font" >فريقنا</a></li>
                     <li class="body-font"><a href="{% url 'login' %}" class="body-font">تسجيل المهندسين</a></li>
 
              {% endif %}

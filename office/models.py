@@ -164,14 +164,14 @@ class Survey(models.Model):
 class EtlobService(models.Model):
     color = models.CharField(max_length=255, null=True, blank=True, verbose_name='اللون المفضل')
     about = models.TextField(null=True, blank=True, verbose_name='نبذه')
-    age = models.IntegerField(null=True, blank=True, verbose_name='العمر')
     date_added = models.DateTimeField(auto_now_add=True, verbose_name='تاريخ الأضافه')
     name = models.CharField(max_length=255, null=True, blank=True, verbose_name='الأسم')
     address = models.CharField(max_length=255, null=True, blank=True, verbose_name='العنوان')
     phone = models.CharField(max_length=255, null=True, blank=True, verbose_name='الهاتف')
-    image = models.ImageField(null=True, blank=True, verbose_name='الصوره')
     email = models.EmailField(max_length=255, null=True, blank=True, verbose_name='البريد الألكترونى')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='الخدمه')
+    city = models.CharField(max_length=255, null=True, blank=True, verbose_name='المدينه')
+
 
     def __str__(self):
         return self.name

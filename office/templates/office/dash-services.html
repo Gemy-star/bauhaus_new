@@ -1,0 +1,39 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %}   طلبات العملاء {% endblock title %}
+
+
+{% block body %}
+
+<div class="main-content-inner">
+<div class="container">
+    <div class="row ml-auto mr-auto">
+        {% for ser in services %}
+<div class="col-4">
+            <div class="card">
+            <div class="card-header">
+                <center>
+                    <h5 class="body-font text-mandigo">{{ ser.name  }}</h5>
+                </center>
+            </div>
+            <div class="card-body">
+                <p class="body-font text-dark">
+                    {{ ser.description }}
+                </p>
+            </div>
+            <div class="card-footer">
+                <center>
+                    <a class="btn btn-mandigo text-white body-font" href="{% url 'etlob-per-service' ser.pk %}">إختر</a>
+                </center>
+            </div>
+            </div>
+
+</div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+
+{% endblock body %}

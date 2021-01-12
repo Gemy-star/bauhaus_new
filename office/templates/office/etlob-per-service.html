@@ -1,0 +1,70 @@
+{% extends 'dashmain.html' %}
+
+
+{% block title %}   طلبات العملاء {% endblock title %}
+
+
+{% block body %}
+
+<div class="main-content-inner">
+<div class="container">
+<div class="row">
+    <div class="col-12">
+         <center>
+             <h4 class="body-font text-mandigo"> طلبات العملاء</h4>
+         </center>
+    </div>
+</div>
+    <div class="row ml-auto mr-auto">
+        {% for etlob in etlobs %}
+<div class="col-4">
+            <div class="card">
+            <div class="card-header">
+                <center>
+                    <h5 class="body-font text-mandigo">{{ etlob.name  }}</h5>
+                </center>
+            </div>
+            <div class="card-body">
+                <h6 class="body-font text-mandigo">تاريخ الطلب</h6>
+                <p class="body-font text-dark">
+                    {{ etlob.date_added.date }}
+                </p>
+                <hr/>
+                     <h6 class="body-font text-mandigo"> العنوان</h6>
+                <p class="body-font text-dark">
+                    {{ etlob.city }}
+                    <br/>
+                    {{ etlob.address }}
+                </p>
+                <hr/>
+                     <h6 class="body-font text-mandigo">اللون المفضل</h6>
+                <p class="body-font text-dark">
+                    {{ etlob.color }}
+                </p>
+                <hr/>
+                        <h6 class="body-font text-mandigo">البريد الألكترونى</h6>
+                <p class="body-font text-dark">
+                    {{ etlob.email|urlize }}
+                </p>
+                <hr/>
+                         <h6 class="body-font text-mandigo">الهاتف</h6>
+                <p class="body-font text-dark">
+                    {{ etlob.phone }}
+                </p>
+                <hr/>
+                         <h6 class="body-font text-mandigo">نبذه عن المشروع</h6>
+                <p class="body-font text-dark">
+                    {{ etlob.about }}
+                </p>
+                <hr/>
+            </div>
+            </div>
+
+</div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+
+{% endblock body %}

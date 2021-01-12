@@ -17,7 +17,7 @@ def services(request):
 
 
 def etlob_service(request):
-    if request.method == 'POST' and request.FILES['image']:
+    if request.method == 'POST':
         name = request.POST.get('name')
         ser = request.POST.get('ser')
         ser_obj = Service.objects.get(pk=ser)
@@ -26,10 +26,7 @@ def etlob_service(request):
         about = request.POST.get('about')
         address = request.POST.get('address')
         phone = request.POST.get('phone')
-        image = request.FILES['image']
-        fs = FileSystemStorage()
-        fs.save(image.name, image)
-        etlob = EtlobService(name=name, image=image, address=address, phone=phone, color=color, about=about, age=age,
+        etlob = EtlobService(name=name, address=address, phone=phone, color=color, about=about, age=age,
                              service=ser_obj)
         etlob.save()
         if etlob is not None:
@@ -170,3 +167,16 @@ def cycle_request(request):
             return JsonResponse({"data": 1})
         else:
             return JsonResponse({"data": -1})
+
+
+def Etlob_service(request, pk):
+    ser_obj = Service.objects.get(pk=pk)
+    etlobs = EtlobService.objects.filter(service=ser_obj)
+    context = {"etlobs": etlobs}
+    return render(request, 'office/etlob-per-service.html', context=context)
+
+
+def services_dash(request):
+    services = Service.objects.all()
+    context = {"services": services}
+    return render(request, 'office/dash-services.html', context=context)
